@@ -30,16 +30,16 @@ db.collectionName.find().pretty(); // Cleaner view
 ### Update / Add fields to exesting documents
 db.collectionName.update({name:"Jane Doe"},{name:"Mbarka Mebrouka", age:24});
 
-  ### Increment
+### Increment
 db.collectionName.update( { name : "Jane Doe" } , { $inc : {age:4} } );
 
-  ### Remove a field 
+### Remove a field 
 db.collectionName.update( { name : "John Smith" } , { $unset : {age:1} } );
 
-  ### Add if non existant
+### Add if non existant
 db.collectionName.update( { name : "James Rodriquez" } , { name : "James Rodriquez" , age : 13 } , { upsert : true} );
 
-  ### Rename a field
+### Rename a field
 db.collectionName.update( { name : "James Rodriquez"}  , { $rename : { "age" : "Trophies" } } );
 
 ### Remove documents
@@ -48,10 +48,10 @@ db.collectionName.remove( { name : "john Smith" } );
 ### Search 
 db.collectionName.find( { name : "James Rodriquez" } );
 
-  ### Search with Or
+### Search with Or
 db.collectionName.find({$or: [ { name : "John Doe" } , { name : "James Rodriquez" } ] } );
 
-  ### Search lt (less than) gt (greater than) lte (less than or equal) gte (greater than or equal)
+### Search lt (less than) gt (greater than) lte (less than or equal) gte (greater than or equal)
 db.collectionName.find( { age : { $lt : 40 } } );
 db.collectionName.find( { age : { $gt : 40 } } );
 
