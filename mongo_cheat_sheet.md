@@ -1,70 +1,70 @@
 # MongoDB Commands 
 
-#### Print the exesting databases
+### Print the exesting databases
 show dbs
 
-#### Switch to / Create database
+### Switch to / Create database
 use dbname
 
-#### Print current database
+### Print current database
 db
 
-#### Create new users
+### Create new users
 db.createUser({
   user:"admin2",
   pwd:"admin2",
   roles: [ "readWrite" , "dbAdmin"]
 });
 
-#### Create new collection
+### Create new collection
 db.createCollection('collectionName');
 
-#### Insert documents 
+### Insert documents 
 db.collectionName.insert( { name : "John Doe" } );
 db.collectionName.insert( [ { name : "Jane Doe" } , { name : "john Smith" , age : 44 } ] ); 
 
-#### Print all the documents of the collection 
+### Print all the documents of the collection 
 db.collectionName.find(); 
 db.collectionName.find().pretty(); // Cleaner view
 
-#### Update / Add fields to exesting documents
+### Update / Add fields to exesting documents
 db.collectionName.update({name:"Jane Doe"},{name:"Mbarka Mebrouka", age:24});
 
-  #### Increment
+  ### Increment
 db.collectionName.update( { name : "Jane Doe" } , { $inc : {age:4} } );
 
-  #### Remove a field 
+  ### Remove a field 
 db.collectionName.update( { name : "John Smith" } , { $unset : {age:1} } );
 
-  #### Add if non existant
+  ### Add if non existant
 db.collectionName.update( { name : "James Rodriquez" } , { name : "James Rodriquez" , age : 13 } , { upsert : true} );
 
-  #### Rename a field
+  ### Rename a field
 db.collectionName.update( { name : "James Rodriquez"}  , { $rename : { "age" : "Trophies" } } );
 
-#### Remove documents
+### Remove documents
 db.collectionName.remove( { name : "john Smith" } );
 
-#### Search 
+### Search 
 db.collectionName.find( { name : "James Rodriquez" } );
 
-  #### Search with Or
+  ### Search with Or
 db.collectionName.find({$or: [ { name : "John Doe" } , { name : "James Rodriquez" } ] } );
 
-  #### Search lt (less than) gt (greater than) lte (less than or equal) gte (greater than or equal)
+  ### Search lt (less than) gt (greater than) lte (less than or equal) gte (greater than or equal)
 db.collectionName.find( { age : { $lt : 40 } } );
 db.collectionName.find( { age : { $gt : 40 } } );
 
 db.collectionName.find( { "Trophies.champions_league" : " 13 " } ); // quotes are necessary
 
-#### Sort ( 1 ascending , -1 descending )
+### Sort ( 1 ascending , -1 descending )
 db.collectionName.find().sort( { age : 1 } );
 
-#### Count 
+### Count 
 db.collectionName.find().count();
 
-#### Limit result
+### Limit result
 db.collectionName.find().limit(10);
 
-#### For each
+### For each
 db.collectionName.forEach( function(doc) { print("User's name : " + doc.name ) } );
