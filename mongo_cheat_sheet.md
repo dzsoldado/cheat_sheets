@@ -1,5 +1,8 @@
 # MongoDB Commands 
 
+### Start mongodb on linux
+sudo service mongod start
+
 ### Print the exesting databases
 show dbs
 
