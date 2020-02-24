@@ -6,6 +6,9 @@ sudo service mongod start
 ### Print the exesting databases
 show dbs
 
+### Print the exesting collections
+show collections
+
 ### Switch to / Create database
 use dbname
 
@@ -40,19 +43,23 @@ db.collectionName.update( { name : "Jane Doe" } , { $inc : {age:4} } );
 db.collectionName.update( { name : "John Smith" } , { $unset : {age:1} } );
 
 ### Add if non existant
-db.collectionName.update( { name : "James Rodriquez" } , { name : "James Rodriquez" , age : 13 } , { upsert : true} );
+db.collectionName.update( { name : "James Rodriguez" } , { name : "James Rodriquez" , age : 13 } , { upsert : true} );
 
 ### Rename a field
-db.collectionName.update( { name : "James Rodriquez"}  , { $rename : { "age" : "Trophies" } } );
+db.collectionName.update( { name : "James Rodriguez"}  , { $rename : { "age" : "Trophies" } } );
 
 ### Remove documents
-db.collectionName.remove( { name : "john Smith" } );
+db.collectionName.remove( { name : "John Smith" } );
 
 ### Search 
-db.collectionName.find( { name : "James Rodriquez" } );
+db.collectionName.find( { name : "James Rodriguez" } );
+
+### Search with restriction (has Name, has Trophy)
+
+db.collectionName.find( { "nom" : "James Rodriguez" } , { "Name" : 1 , "Trophies" : 1 } )
 
 ### Search with Or
-db.collectionName.find({$or: [ { name : "John Doe" } , { name : "James Rodriquez" } ] } );
+db.collectionName.find( { $or: [ { name : "John Doe" } , { name : "James Rodriguez" } ] } );
 
 ### Search lt (less than) gt (greater than) lte (less than or equal) gte (greater than or equal)
 db.collectionName.find( { age : { $lt : 40 } } );
