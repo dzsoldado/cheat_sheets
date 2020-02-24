@@ -29,18 +29,21 @@ db.createCollection('collectionName');
 db.collectionName.insert( { name : "John Doe" } );
 db.collectionName.insert( [ { name : "Jane Doe" } , { name : "john Smith" , age : 44 } ] ); 
 
-### Print all the documents of the collection 
+### Return all the documents of the collection 
 db.collectionName.find(); 
 db.collectionName.find().pretty(); // Cleaner view
 
 ### Update / Add fields to exesting documents
-db.collectionName.update({name:"Jane Doe"},{name:"Mbarka Mebrouka", age:24});
+db.collectionName.update( { name:"Jane Doe" } , { name : "Mbarka Mebrouka" , age : 24 } );
 
 ### Increment
-db.collectionName.update( { name : "Jane Doe" } , { $inc : {age:4} } );
+db.collectionName.update( { name : "Jane Doe" } , { $inc : { age : 4 } } );
+
+### Update specific fields
+db.collectionName.update( { name : "Jane Doe" } , { $set: { age : 44 } } );
 
 ### Remove a field 
-db.collectionName.update( { name : "John Smith" } , { $unset : {age:1} } );
+db.collectionName.update( { name : "John Smith" } , { $unset : { age : 1 } } );
 
 ### Add if non existant
 db.collectionName.update( { name : "James Rodriguez" } , { name : "James Rodriquez" , age : 13 } , { upsert : true} );
@@ -54,7 +57,7 @@ db.collectionName.remove( { name : "John Smith" } );
 ### Search 
 db.collectionName.find( { name : "James Rodriguez" } );
 
-### Search with restriction (has Name, has Trophy)
+### Search with restriction ( name : 1 => return field, : 0 => return all fields except this)
 
 db.collectionName.find( { "nom" : "James Rodriguez" } , { "Name" : 1 , "Trophies" : 1 } )
 
